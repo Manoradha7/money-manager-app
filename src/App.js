@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Transaction } from "./Transaction";
 import { OverView } from "./OverView";
-// import {Charts} from "./Charts"
+import { Charts } from "./Charts";
 
 export default function App() {
   return (
@@ -85,10 +85,15 @@ function WeeklyExpense({ expense, income }) {
         <b>Week</b>
       </span>
       <div className="month-data">
-        <span>Income :{Math.round(income / 52)}</span>
-        <span>Expense :{Math.round(expense / 52)}</span>
+        <span><b>Income :{Math.round(income / 52)}</b></span>
+        <span><b>Expense :{Math.round(expense / 52)}</b></span>
       </div>
-      {/* <Charts income={Math.round(income/52)} expense={Math.round(expense/52)}/>       */}
+      <div className="charts">
+        <Charts
+          income={Math.round(income / 52)}
+          expense={Math.round(expense / 52)}
+        />
+      </div>
     </div>
   );
 }
@@ -99,10 +104,15 @@ function MonthlyExpense({ expense, income }) {
         <b>Month</b>
       </span>
       <div className="month-data">
-        <span>Income :{Math.round(income / 12)}</span>
-        <span>Expense :{Math.round(expense / 12)}</span>
+        <span><b>Income :{Math.round(income / 12)}</b></span>
+        <span><b>Expense :{Math.round(expense / 12)}</b></span>
       </div>
-      {/* <Charts income={Math.round(income/12)} expense={Math.round(expense/12)}/>    */}
+      <div className="charts">
+        <Charts
+          income={Math.round(income / 12)}
+          expense={Math.round(expense / 12)}
+        />
+      </div>
     </div>
   );
 }
