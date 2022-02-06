@@ -1,6 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 
+
 export function AddTransaction(props) {
   // using useState hook get the value of the amount,desc,type variable
   const [amount, setAmount] = useState();
@@ -21,21 +22,25 @@ export function AddTransaction(props) {
   return (
     <div className="add-transaction">
       <TextField
-        id="standard-basic"
+        id="amount"
+        name="number"
         type="number"
         label="Amount"
         variant="standard"
         value={amount}
         onChange={(x) => setAmount(x.target.value)}
-        required />
+        required
+      />
       <TextField
-        id="standard-basic"
+        id="desc"
+        name="desc"
         type="text"
         label="Description"
         variant="standard"
         value={desc}
         onChange={(x) => setDesc(x.target.value)}
-        required />
+        required
+      />
       <div className="radio-btn">
         <input
           type="radio"
@@ -43,7 +48,8 @@ export function AddTransaction(props) {
           name="type"
           value="INCOME"
           checked={type === "INCOME"}
-          onChange={(x) => setType(x.target.value)} />
+          onChange={(x) => setType(x.target.value)}
+        />
         <label htmlFor="income">Income</label>
         <input
           type="radio"
@@ -51,7 +57,8 @@ export function AddTransaction(props) {
           name="type"
           value="EXPENSE"
           checked={type === "EXPENSE"}
-          onChange={(x) => setType(x.target.value)} />
+          onChange={(x) => setType(x.target.value)}
+        />
         <label htmlFor="expense">Expense</label>
       </div>
       <div className="trans-btn">

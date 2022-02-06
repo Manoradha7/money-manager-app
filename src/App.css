@@ -5,35 +5,96 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  background-image: url("./13218.jpg");
-  background-size: cover;
-}
-.header{
-  font-family: "Aladin", cursive;
-  width: 100%;
-}
 .App {
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
-h4 {
+.logo_container {
+  display: flex;
   height: fit-content;
   background-color: cadetblue;
   color: bisque;
   box-shadow: 10px 10px 51px -21px rgba(0, 0, 0, 0.75);
+  height: 55px;
+  padding: 5px;
 }
+.background {
+  background: url("./img/13218.jpg")  ;
+  background-size:cover;
+ 
+}
+.header {
+  font-family: "Aladin", cursive;
+  width: 100%;
+}
+.signin-signup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.app-title {
+  grid-area: 1/1/1/1;
+  text-align: center;
+  place-items: center;
+  justify-items: center;
+  color:rgb(39, 102, 218);
+  font-size: 25px;
+}
+.logo-icon{
+  font-size: 75px;
+  
+}
+.signin-signup-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  place-items: center;
+  grid-area: 1/2/1/2;
+  height: auto;
+  margin: 0 auto;
+  width: 370px;
+  gap: 4px;
+  padding: 40px 30px;
+  background:rgba(148, 223, 233, 0.5);
+  box-shadow: 9px 10px 14px -1px rgba(81, 97, 104, 0.849);
+  backdrop-filter: blur(6.5px);
+  border-radius: 10px;
+  border: 2px solid rgba(26, 105, 151, 0.89);
+}
+
+.h2{
+  color: rgb(238, 218, 34);
+  font-size: 60px;
+}
+.input{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+.dashboard{
+ display: flex;
+ width: 100vw;
+ height: 100vh;
+}
+
 .details-box {
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 100%;
   height: 650px;
-  margin: 20px;
+  margin: 0;
   gap: 18px;
   padding: 10px;
-  border-radius: 15px;
-  box-shadow: -4px 3px 17px 7px rgba(0, 0, 0, 0.43);
   background: rgba(155, 246, 255, 0.25);
+}
+.btn{
+  display: flex;
+  flex-direction: row;
 }
 .overview-box {
   display: flex;
@@ -43,10 +104,10 @@ h4 {
   font-family: "Poppins";
   height: fit-content;
 }
-.overview{
+.overview {
   width: 50%;
 }
-.transaction{
+.transaction {
   width: 50%;
 }
 .balance-box {
@@ -65,57 +126,74 @@ h4 {
   padding: 15px 20px 15px 20px;
   border-radius: 5px;
 }
-.expense-container{
+.expense-container {
   display: flex;
   flex-direction: row;
   gap: 18px;
   margin: 20px;
 }
-.income-box, .expense-box{
+.income-box,
+.expense-box,
+.balance_box {
   display: flex;
+  overflow-y:scroll;
   flex-direction: column;
   border-radius: 4.5px;
   border: 1px solid #7d939e;
   padding: 15px 20px;
   gap: 2px;
   width: 150px;
+  cursor: pointer;
 }
 .income-box {
-font-weight:bold;
-font-size: 20px;
-color: green;
+  font-weight: bold;
+  font-size: 20px;
+  color: green;
+  background-color: rgb(185, 233, 114);
 }
-.expense-box{
-  font-weight:bold;
+.expense-box {
+  font-weight: bold;
   font-size: 20px;
   color: rgb(247, 3, 3);
+  background-color: rgb(206, 117, 117);
 }
-.transaction-container{
+.balance_box {
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(3, 109, 247);
+  background-color: rgb(117, 196, 206);
+}
+.transaction-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Aladin', sans-serif;
-  padding: 10px,22px;
+  font-family: "Aladin", sans-serif;
+  padding: 10px 22px;
+  margin-top: 5px;
   font-size: 18px;
   width: 100%;
+  height: 620px;
   gap: 10px;
   font-weight: bold;
   font-size: 25px;
+  border: 1px solid rgb(84, 98, 109);
+  box-shadow: 10px 10px 51px -21px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
 }
-.search-bar{
-  padding:10px 12px;
+.search-bar {
+  padding: 10px 12px;
   border-radius: 12px;
   background: rgb(125, 184, 184);
   border: 1px solid #e6e8e9;
   outline: none;
 }
-.cell{
+.cell {
   display: flex;
   flex-direction: row;
   gap: 10px;
   padding: 5px 10px;
   font-size: 14px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   background: rgb(244, 255, 255);
   border: 1px solid #2d6886;
   border-radius: 10px;
@@ -123,7 +201,6 @@ color: green;
   font-weight: normal;
   width: 80%;
   justify-content: space-between;
-  
 }
 .seperateExpense {
   display: flex;
@@ -134,29 +211,32 @@ color: green;
   align-content: stretch;
   align-items: center;
 }
-.monthly{
+.monthly {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
   height: 300px;
   padding: 10px;
   padding-bottom: 10px;
   border: 1px solid rgb(84, 98, 109);
   border-radius: 10px;
   text-align: center;
+  font-weight: bold;
+  font-size: 20px;
   box-shadow: 10px 10px 51px -21px rgba(0, 0, 0, 0.75);
 }
-.month-data{
-display: flex;
-flex-direction: column;
-text-align: left;
-gap: 10px;
+.month-data {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 10px;
+  
 }
 .btm {
   height: 10px;
   width: 20px;
 }
-.radio-btn{
+.radio-btn {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -165,24 +245,91 @@ gap: 10px;
   align-items: center;
   font-weight: 100;
 }
-.charts{
+.charts {
   padding: 10px;
 }
+.quotes_container{
+  display: flex;
+  flex-direction: column;
+  border-radius: 4.5px;
+  border: 1px solid #7d939e;
+  margin: 5px;
+  padding: 15px 20px;
+  gap: 2px;
+  width: 350px;
+  box-shadow: 10px 10px 51px -21px rgba(0, 0, 0, 0.75);
+}
+.chart{
+  padding: 5px;
+}
 
-@media (max-width:1000px){
-  .details-box{
+.cell:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 0px;
+  height: 100%;
+  background: crimson;
+  border-radius: 5px;
+}
+.cell:hover::before,
+.cell.active::before {
+  width: 5px;
+  transition: 0.3s;
+}
+
+@media (max-width: 1000px) {
+  .details-box {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 100vw;
     align-items: center;
     justify-content: center;
     height: fit-content;
   }
-  .maincontainer{
+  .maincontainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    
   }
+  .transaction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Aladin", sans-serif;
+    padding: 10px 22px;
+    margin-top: 5px;
+    font-size: 18px;
+    width: 250px;
+    height: fit-content;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    border: 1px solid rgb(84, 98, 109);
+    box-shadow: 10px 10px 51px -21px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+  }
+}
+
+@media (max-width:600px){
+  .expense-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .income-box,
+.expense-box,
+.balance_box{
+  width: 300px;
+  min-width: auto;
+}
+.signin-signup{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.signin-signup-form {
+  width: auto;
+}
 }

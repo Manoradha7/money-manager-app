@@ -10,9 +10,9 @@ export function Charts({income,expense}) {
   // color for the charts to display
   const colors = ["green", "red"];
   return (
-    <div>
-      <PieChart width={210} height={210}>
-      <Pie data={data} dataKey="value" cx={100} cy={100} innerRadius={60} outerRadius={70} fill="#82ca9d" label >
+    <div className="chart">
+      <PieChart width={240} height={210}>
+      <Pie data={data} dataKey="value" cx={106} cy={100} innerRadius={60} outerRadius={70} fill="#82ca9d" label >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index]} />
           ))}

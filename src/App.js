@@ -1,24 +1,77 @@
 import "./App.css";
+import { Switch, Route, Redirect,useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Transaction } from "./Transaction";
 import { OverView } from "./OverView";
 import { Charts } from "./Charts";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import Button from "@mui/material/Button";
+import { pink } from "@mui/material/colors";
+import { Signup } from "./user/Signup.js";
+import { Signin } from "./user/Signin.js";
+import { ForgotPassword } from "./user/ForgotPassword.js";
+import { ResetPassword } from "./user/ResetPassword.js";
+import { Message } from "./user/Message";
 
 export default function App() {
   return (
     <div className="App">
-      <Typography
-        variant="h4"
-        sx={{ fontFamily: "'Aladin', cursive" }}
-        align="center"
-        className="header"
-      >
-        Money Manager
-      </Typography>
-      <FormComponent />
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/signin" />
+        </Route>
+        <Route path="/signin">
+          <Signin />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/forgotpassword">
+          <ForgotPassword />
+        </Route>
+        <Route path="/resetpassword/:id">
+          <ResetPassword />
+        </Route>
+        <Route path="/activationmessage">
+          <Message msg="Account Activated" />
+      </Route>
+
+        {/* Dashboard */}
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route> 
+      </Switch>     
     </div>
   );
+}
+
+function Dashboard(){
+  const history = useHistory();
+  return(
+   <div className='App'>
+      <div className="logo_container">
+        <Typography
+          variant="h4"
+          sx={{ fontFamily: "'Aladin', cursive" }}
+          className="header"
+        >
+          <AccountBalanceWalletIcon /> Money Manager
+        </Typography>
+        <div className="btn">
+          <Button variant="text" sx={{ color: pink[500] }}>
+            Dashboard
+          </Button>
+          <Button variant="text" sx={{ color: pink[500] }} onClick={()=>history.push("/signin")}>
+            Logout
+          </Button>
+        </div>
+      </div>
+      <div className="form_container">
+        <FormComponent />
+      </div>
+   </div>
+  )
 }
 
 function FormComponent(props) {
@@ -85,8 +138,12 @@ function WeeklyExpense({ expense, income }) {
         <b>Week</b>
       </span>
       <div className="month-data">
-        <span><b>Income :{Math.round(income / 52)}</b></span>
-        <span><b>Expense :{Math.round(expense / 52)}</b></span>
+        <span style={{ color: "green" }}>
+          Income :{Math.round(income / 52)}
+        </span>
+        <span style={{ color: "red" }}>
+          Expense :{Math.round(expense / 52)}
+        </span>
       </div>
       <div className="charts">
         <Charts
@@ -104,8 +161,12 @@ function MonthlyExpense({ expense, income }) {
         <b>Month</b>
       </span>
       <div className="month-data">
-        <span><b>Income :{Math.round(income / 12)}</b></span>
-        <span><b>Expense :{Math.round(expense / 12)}</b></span>
+        <span style={{ color: "green" }}>
+          Income :{Math.round(income / 12)}
+        </span>
+        <span style={{ color: "red" }}>
+          Expense :{Math.round(expense / 12)}
+        </span>
       </div>
       <div className="charts">
         <Charts

@@ -1,4 +1,4 @@
-import { Typography, Button } from "@mui/material";
+import { Typography,Button } from "@mui/material";
 import { useState } from "react";
 import { AddTransaction } from "./AddTransaction";
 
@@ -8,8 +8,18 @@ export function OverView({ addTransaction, expense, income }) {
   const [show, setShow] = useState(false);
   return (
     <div className="overview-box">
+      <div className="expense-container">
+        <div className="income-box">
+          Income<hr/><span className="income-value">${income}</span>
+        </div>
+        <div className="expense-box">
+          Expense<hr/><span className="expense-value">${expense}</span>
+        </div>
+        <div className="balance_box">
+        Balance<hr/><span>${income - expense}</span>
+        </div>
+      </div>
       <div className="balance-box">
-        <Typography stye={{ marginRight: "auto" }}>Balance:${income - expense}</Typography>
         <Button
           variant="contained"
           style={{ marginLeft: "auto" }}
@@ -24,16 +34,13 @@ export function OverView({ addTransaction, expense, income }) {
       {show && (
         <AddTransaction setShow={setShow} addTransaction={addTransaction} />
       )}
-
-      {/* container for total income and expenditure */}
-      <div className="expense-container">
-        <div className="income-box">
-          Income<span className="income-value">{income}</span>
-        </div>
-        <div className="expense-box">
-          Expense<span className="expense-value">{expense}</span>
-        </div>
+      <div className="quotes_container">
+      <Typography variant="body1" gutterBottom>
+        Don't Save what is left Spending, But Spend what is left after Savings <br/> -Warren Buffet
+      </Typography>
       </div>
+   
+
     </div>
   );
 }
