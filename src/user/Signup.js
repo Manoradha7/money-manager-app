@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { API_URL } from "../globalConstant.js";
 
 // icons
 import { MdAccountBalanceWallet } from "react-icons/md";
@@ -88,11 +89,9 @@ function Signup() {
         console.log("onSubmit", values);
       },
     });
-  //url for backend
-  const URL = `http://localhost:8000`;
 
   const Register = async (values) => {
-    await fetch(`${URL}/users/signup`, {
+    await fetch(`${API_URL}/users/signup`, {
       method: "POST",
       body: JSON.stringify(values),
       headers: {

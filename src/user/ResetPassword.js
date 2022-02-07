@@ -7,6 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import * as yup from "yup";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { API_URL } from "../globalConstant.js";
 
 // icons
 import { MdAccountBalanceWallet } from "react-icons/md";
@@ -51,9 +52,8 @@ function ResetPassword() {
       },
     });
 
-  const URL = `http://localhost:8000`;
   const Changepassword = async (values) => {
-    fetch(`${URL}/users/resetpassword`, {
+    fetch(`$${API_URL}/users/resetpassword`, {
       method: "POST",
       body: JSON.stringify(values),
       headers: { "Content-Type": "application/json" },

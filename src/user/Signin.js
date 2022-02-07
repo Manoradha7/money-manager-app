@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import * as React from "react";
 import MuiAlert from "@mui/material/Alert";
+import { API_URL } from "../globalConstant.js";
 
 // icons
 import { MdAccountBalanceWallet } from "react-icons/md";
@@ -60,12 +61,10 @@ function Signin() {
       },
     });
 
-  //url for backend
-  const URL = `http://localhost:8000`;
 
   //fetching the details
   const Login = async (values) => {
-    await fetch(`${URL}/users/signin`, {
+    await fetch(`${API_URL}/users/signin`, {
       method: "POST",
       body: JSON.stringify(values),
       headers: {
