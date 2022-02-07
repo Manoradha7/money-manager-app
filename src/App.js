@@ -13,7 +13,8 @@ import { Signin } from "./user/Signin.js";
 import { ForgotPassword } from "./user/ForgotPassword.js";
 import { ResetPassword } from "./user/ResetPassword.js";
 import { Message } from "./user/Message";
-import { AllTransaction } from "./AllTransaction";
+import { AllTransaction } from "./components/AllTransaction";
+import { API_URL } from "./globalConstant.js";
 
 export default function App() {
   return (
@@ -99,7 +100,7 @@ function FormComponent(props) {
     const transactionArray = [...transaction];
     //pushing payload into the transaction array
     transactionArray.push(payload);
-    fetch(`http://localhost:8000/transaction/expense`, {
+    fetch(`${API_URL}/transaction/expense`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -130,7 +131,7 @@ function FormComponent(props) {
   };
   useEffect(() => {
     fetch(
-      `http://localhost:8000/transaction/expense/${window.localStorage.getItem(
+      `${API_URL}/transaction/expense/${window.localStorage.getItem(
         "email"
       )}`,
       {

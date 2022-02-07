@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { pink } from "@mui/material/colors";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { API_URL } from "../globalConstant.js";
 
 export function AllTransaction() {
   const history = useHistory();
@@ -13,7 +14,7 @@ export function AllTransaction() {
 
   const getTransaction=()=>{
     fetch(
-      `http://localhost:8000/transaction/expense/${window.localStorage.getItem(
+      `${API_URL}/transaction/expense/${window.localStorage.getItem(
         "email"
       )}`,
       {
@@ -34,7 +35,7 @@ export function AllTransaction() {
   useEffect(getTransaction, []);
 
   const deleteTransaction = (_id) => {
-    fetch(`http://localhost:8000/transaction/expense/${_id}`, {
+    fetch(`${API_URL}/transaction/expense/${_id}`, {
       method: "DELETE",
     }).then(() => getTransaction());
   };
