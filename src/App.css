@@ -5,6 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  background:rgba(168, 201, 206, 0.432)
+}
 .App {
   display: flex;
   flex-direction: column;
@@ -302,7 +305,7 @@
     padding: 10px 22px;
     margin-top: 5px;
     font-size: 18px;
-    width: 250px;
+    min-width: 250px;
     height: fit-content;
     gap: 10px;
     font-weight: bold;
@@ -311,6 +314,34 @@
     box-shadow: 10px 10px 51px -21px rgba(0, 0, 0, 0.75);
     border-radius: 10px;
   }
+}
+.trans_table {
+  width: 80%;
+  margin: 40px auto;
+  background: rgba( 172, 223, 229, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 2.5px );
+  border-radius: 10px;
+  border: solid rgba( 255, 255, 255, 0.18 );
+}
+table.list{
+  text-align: center;
+  width: 100%;
+}
+
+td{
+  border: 1px solid rgb(204,200,200);
+  text-align: left;
+  padding: 8px 15px;
+}
+
+tr:nth-child(even),table.list thead{
+  background-color: rgb(204,200,200);
+}
+tr:hover{
+  background-color: rgb(155, 164, 165);
+  transform: scale(1.01);
+  box-shadow: 2px 2px 12px rosybrown;
 }
 
 @media (max-width:600px){

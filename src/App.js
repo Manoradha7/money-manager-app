@@ -1,10 +1,10 @@
 import "./App.css";
-import { Switch, Route, Redirect,useHistory } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Transaction } from "./Transaction";
-import { OverView } from "./OverView";
-import { Charts } from "./Charts";
+import { Transaction } from "./components/Transaction";
+import { OverView } from "./components/OverView";
+import { Charts } from "./components/Charts";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Button from "@mui/material/Button";
 import { pink } from "@mui/material/colors";
@@ -13,6 +13,7 @@ import { Signin } from "./user/Signin.js";
 import { ForgotPassword } from "./user/ForgotPassword.js";
 import { ResetPassword } from "./user/ResetPassword.js";
 import { Message } from "./user/Message";
+import { AllTransaction } from "./AllTransaction";
 
 export default function App() {
   return (
@@ -35,21 +36,23 @@ export default function App() {
         </Route>
         <Route path="/activationmessage">
           <Message msg="Account Activated" />
-      </Route>
+        </Route>
 
         {/* Dashboard */}
         <Route path="/dashboard">
           <Dashboard />
-        </Route> 
-      </Switch>     
+        </Route>
+        <Route path="/alltransaction">
+          <AllTransaction />
+        </Route>
+      </Switch>
     </div>
   );
 }
-
-function Dashboard(){
+function Dashboard() {
   const history = useHistory();
-  return(
-   <div className='App'>
+  return (
+    <div className="App">
       <div className="logo_container">
         <Typography
           variant="h4"
@@ -59,10 +62,18 @@ function Dashboard(){
           <AccountBalanceWalletIcon /> Money Manager
         </Typography>
         <div className="btn">
-          <Button variant="text" sx={{ color: pink[500] }}>
+          <Button
+            variant="text"
+            sx={{ color: pink[500] }}
+            onClick={() => history.push("/dashboard")}
+          >
             Dashboard
           </Button>
-          <Button variant="text" sx={{ color: pink[500] }} onClick={()=>history.push("/signin")}>
+          <Button
+            variant="text"
+            sx={{ color: pink[500] }}
+            onClick={() => history.push("/signin")}
+          >
             Logout
           </Button>
         </div>
@@ -70,8 +81,8 @@ function Dashboard(){
       <div className="form_container">
         <FormComponent />
       </div>
-   </div>
-  )
+    </div>
+  );
 }
 
 function FormComponent(props) {
@@ -88,6 +99,18 @@ function FormComponent(props) {
     const transactionArray = [...transaction];
     //pushing payload into the transaction array
     transactionArray.push(payload);
+    fetch(`http://localhost:8000/transaction/expense`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        "x-auth-token": window.localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        ...payload,
+        email: window.localStorage.getItem("email"),
+      }),
+    });
     //update the transaction Array with new transaction array
     setTransaction(transactionArray);
   };
@@ -97,7 +120,7 @@ function FormComponent(props) {
     let exp = 0;
     let inc = 0;
     transaction.map((payload) => {
-      // if the type is expense then add amountto expense otherwise add amount to the income
+      // if the type is expense then add amount to expense otherwise add amount to the income
       return payload.type === "EXPENSE"
         ? (exp = exp + payload.amount)
         : (inc = inc + payload.amount);
@@ -105,10 +128,30 @@ function FormComponent(props) {
     updateExpense(exp);
     updateIncome(inc);
   };
+  useEffect(() => {
+    fetch(
+      `http://localhost:8000/transaction/expense/${window.localStorage.getItem(
+        "email"
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          "x-auth-token": window.localStorage.getItem("token"),
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setTransaction(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   // whenever the transaction value is changed the useEffect hook mounted for the calculation
   // eslint-disable-next-line
   useEffect(() => CalculateBalance(), [transaction]);
-
+  console.log("tr", transaction);
   return (
     <div className="maincontainer">
       <div className="details-box">

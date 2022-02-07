@@ -1,9 +1,10 @@
 import { Typography,Button } from "@mui/material";
 import { useState } from "react";
 import { AddTransaction } from "./AddTransaction";
+import {useHistory} from 'react-router-dom'
 
 export function OverView({ addTransaction, expense, income }) {
-
+ const history = useHistory()
   // using useState hook get value of the show variable
   const [show, setShow] = useState(false);
   return (
@@ -29,6 +30,7 @@ export function OverView({ addTransaction, expense, income }) {
         {/* If show value true the change value of the button into cancel otherwise keep the value as ADD  */}
           {show ? "Cancel" : "ADD"}
         </Button>
+        <Button  variant="contained" onClick={()=>history.push("/alltransaction")}>All Transaction</Button>
       </div>
       
       {show && (

@@ -81,6 +81,12 @@ function Signin() {
           setMsg({ Message: "Invalid Credentials", status: "error" });
           setOpen(true);
         }
+        return response.json();
+      }).then((res)=>{
+        const {user:{email,token}}=res;
+        console.log(res)
+        window.localStorage.setItem('email',email);
+        window.localStorage.setItem('token',token);
       })
       .catch((err) => {
         setMsg({ Message: "Error", status: "error" });
